@@ -1179,10 +1179,16 @@ Specificity = 1 - FPR</script><p><strong>ROC曲线</strong></p>
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2022-11-05 17:45:48 / 修改时间：18:03:06" itemprop="dateCreated datePublished" datetime="2022-11-05T17:45:48+08:00">2022-11-05</time>
+              <time title="创建时间：2022-11-05 17:45:48" itemprop="dateCreated datePublished" datetime="2022-11-05T17:45:48+08:00">2022-11-05</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-12 15:45:10" itemprop="dateModified" datetime="2023-06-12T15:45:10+08:00">2023-06-12</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1231,7 +1237,7 @@ Specificity = 1 - FPR</script><p><strong>ROC曲线</strong></p>
 <li>注解导错包</li>
 <li>应该写成<code>@Service(&quot;xxx&quot;)</code>，加上名称</li>
 </ol>
-<h3 id="bug05-websocket服务器无法使用自动注入"><a href="#bug05-websocket服务器无法使用自动注入" class="headerlink" title="bug05:  websocket服务器无法使用自动注入"></a>bug05:  websocket服务器无法使用自动注入</h3><p><strong>问题描述</strong></p>
+<h3 id="bug06-websocket服务器无法使用自动注入"><a href="#bug06-websocket服务器无法使用自动注入" class="headerlink" title="bug06:  websocket服务器无法使用自动注入"></a>bug06:  websocket服务器无法使用自动注入</h3><p><strong>问题描述</strong></p>
 <blockquote>
 <p>在使用<code>@ServerEndpoint</code>注解修饰的websocket服务器上无法用<code>@Autowired</code>等注解自动注入相应的service</p>
 </blockquote>
@@ -1240,12 +1246,12 @@ Specificity = 1 - FPR</script><p><strong>ROC曲线</strong></p>
 <p>原因是websocket服务器是多列的，而自动注入的bean要求是单例的，因此注入失效，可以是用上下文对象，ApplicationContext进行间接注入，具体方法如下：</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 01 在websocket服务器程序中声明ApplicationContext对象，并设置set方法</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> ApplicationContext applicationContext;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setApplicationContext</span><span class="params">(ApplicationContext applicationContext)</span>&#123;</span><br><span class="line">    WebSocketServer.applicationContext = applicationContext;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 02 在启动类中传入上下文对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="type">ConfigurableApplicationContext</span> <span class="variable">applicationContext</span> <span class="operator">=</span> SpringApplication.run(WebSocketChatRoomApplication.class, args);</span><br><span class="line">        <span class="comment">// 在启动类中传入上下文</span></span><br><span class="line">        WebSocketServer.setApplicationContext(applicationContext);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 03 在需要使用bean的地方通过 ApplicationContext 对象获取bean实例</span></span><br><span class="line"><span class="type">RelationService</span> <span class="variable">relationService</span> <span class="operator">=</span> applicationContext.getBean(RelationServiceImpl.class);</span><br><span class="line">List&lt;String&gt; users = relationService.queryMembers(group_id);</span><br></pre></td></tr></table></figure>
-<h3 id="bug06-前端vue3，后端springboot，前端访问时出现跨域错误"><a href="#bug06-前端vue3，后端springboot，前端访问时出现跨域错误" class="headerlink" title="bug06: 前端vue3，后端springboot，前端访问时出现跨域错误"></a>bug06: 前端vue3，后端springboot，前端访问时出现跨域错误</h3><p><strong>解决方法：</strong></p>
+<h3 id="bug07-前端vue3，后端springboot，前端访问时出现跨域错误"><a href="#bug07-前端vue3，后端springboot，前端访问时出现跨域错误" class="headerlink" title="bug07: 前端vue3，后端springboot，前端访问时出现跨域错误"></a>bug07: 前端vue3，后端springboot，前端访问时出现跨域错误</h3><p><strong>解决方法：</strong></p>
 <blockquote>
 <p>在开发前后端分离分离项目时，浏览器会执行同源策略，即访问的地址如果又不相同的地方比如IP地址，端口号等就会出现跨域错误，前后端都能配置跨域以解决问题，这里采用后端配置跨域。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 跨域</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">addCorsMappings</span><span class="params">(CorsRegistry registry)</span> &#123;</span><br><span class="line">        registry.addMapping(<span class="string">&quot;/**&quot;</span>)</span><br><span class="line">                .allowedOriginPatterns(<span class="string">&quot;*&quot;</span>)</span><br><span class="line">                .allowedMethods(<span class="string">&quot;GET&quot;</span>, <span class="string">&quot;HEAD&quot;</span>, <span class="string">&quot;POST&quot;</span>, <span class="string">&quot;PUT&quot;</span>, <span class="string">&quot;DELETE&quot;</span>, <span class="string">&quot;OPTIONS&quot;</span>)</span><br><span class="line">                .allowCredentials(<span class="literal">true</span>)</span><br><span class="line">                .maxAge(<span class="number">3600</span>)</span><br><span class="line">                .allowedHeaders(<span class="string">&quot;*&quot;</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="bug07：配置跨域后，添加拦截器进行token验证，又发生跨域错误"><a href="#bug07：配置跨域后，添加拦截器进行token验证，又发生跨域错误" class="headerlink" title="bug07：配置跨域后，添加拦截器进行token验证，又发生跨域错误"></a>bug07：配置跨域后，添加拦截器进行token验证，又发生跨域错误</h3><p><strong>问题描述：</strong></p>
+<h3 id="bug08：配置跨域后，添加拦截器进行token验证，又发生跨域错误"><a href="#bug08：配置跨域后，添加拦截器进行token验证，又发生跨域错误" class="headerlink" title="bug08：配置跨域后，添加拦截器进行token验证，又发生跨域错误"></a>bug08：配置跨域后，添加拦截器进行token验证，又发生跨域错误</h3><p><strong>问题描述：</strong></p>
 <blockquote>
 <p>在拦截器中获取token，如果有则放行，如果没有则拦截，在前端已配置token，但后端打印输出时确实null，然后报跨域错误。</p>
 </blockquote>
@@ -1254,6 +1260,39 @@ Specificity = 1 - FPR</script><p><strong>ROC曲线</strong></p>
 <p>跨域时前端进行后端请求时会先发一个OPTIONS方法的嗅探请求，检测该请求是否为跨域，在没有配置拦截器时，因为配置了跨域，因此不报错。配置之后，由于该请求先到了拦截器，而且这个请求是不含任何数据的，因此没有token，被驳回，而且没有检测到已经配置了跨域，因此会报跨域错误。在拦截器中判断OPTIONS请求，放行就行了。</p>
 </blockquote>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">preHandle</span><span class="params">(HttpServletRequest request, HttpServletResponse response, Object handler)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(<span class="string">&quot;OPTIONS&quot;</span>.equals(request.getMethod().toUpperCase()))&#123;</span><br><span class="line">            log.info(<span class="string">&quot;Method:OPTIONS&quot;</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">String</span> <span class="variable">authorization</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;Authorization&quot;</span>);</span><br><span class="line">        log.info(<span class="string">&quot;拦截的请求token: &quot;</span>+authorization);</span><br><span class="line">        <span class="keyword">if</span>(authorization != <span class="literal">null</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            response.setHeader(<span class="string">&quot;Access-Control-Allow-Origin&quot;</span>, <span class="string">&quot;*&quot;</span>);</span><br><span class="line">            response.setStatus(<span class="number">401</span>);</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="bug-09-hexo-无法正常显示markdown公式："><a href="#bug-09-hexo-无法正常显示markdown公式：" class="headerlink" title="bug 09: hexo 无法正常显示markdown公式："></a>bug 09: hexo 无法正常显示markdown公式：</h3><p><strong>问题描述：</strong></p>
+<blockquote>
+<p>hexo 在网页显示公式时直接显示原公式代码，无法渲染成正确的结果。</p>
+</blockquote>
+<p><strong>问题原因：</strong></p>
+<blockquote>
+<p>hexo 默认使用”hexo-renderer-marked”引擎渲染网页，该引擎会把一些特殊的md符号转换成相应的html标签。比如公式中的<code>_</code>表示下标，但在hexo会被渲染<code>&lt;em&gt;</code>标签，导致公式无法正常显示。</p>
+</blockquote>
+<p><strong>解决方法：</strong></p>
+<ol>
+<li><p>更换引擎：将默认引擎更换成“hexo-renderer-kramed”。该引擎在默认引擎上修改了一些bug，如公式显示bug。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在主题中开启mathjax开关</p>
+<p>使用了主题，要在主题中开启mathjax开关。找到主题中的<code>_config,yml</code>文件，将mathjax修改成以下内容：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># MathJax Support</span><br><span class="line">mathjax:</span><br><span class="line">  enable: true</span><br><span class="line">  per_page: true</span><br></pre></td></tr></table></figure>
+<p>之后在文章的Front-matter里打开mathjax开关：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: index.html</span><br><span class="line">date: 2016-12-28 21:01:30</span><br><span class="line">tags:</span><br><span class="line">mathjax: true</span><br><span class="line">--</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="bug10-hexo-无法正常显示图片"><a href="#bug10-hexo-无法正常显示图片" class="headerlink" title="bug10: hexo 无法正常显示图片"></a>bug10: hexo 无法正常显示图片</h3><p><strong>解决方法：</strong></p>
+<ol>
+<li><p>下载依赖：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在根目录的<code>_config.yml</code>文件中将<code>post_asset_folder</code>设置成<code>true</code></p>
+</li>
+<li><p>在文章目录创建与文章名相同的目录，用来存放图片</p>
+</li>
+<li><p>在md中引用图片</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![图片描述]（./包名/xxx.jpg）</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
 
       
     </div>
