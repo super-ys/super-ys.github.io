@@ -20,20 +20,25 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="1. 线性回归问题描述： 问题化成求解区间的值的问题成为回归问题；若问题的各项指标与所求值为线性关系则称为线性回归问题。 数学公式 h_\theta(x) &#x3D; \sum^{n}_{i&#x3D;0}\theta_ix_i &#x3D; \theta^Tx $$   (1)  其中$x$为特征值，$\theta$为相应权重  **误差项分析：**  公式(1)所建立的模型预测的值与真实值存在误差，对于每个样本用数学公式">
+  <meta name="description" content="1. 线性回归问题描述： 问题化成求解区间的值的问题成为回归问题；若问题的各项指标与所求值为线性关系则称为线性回归问题。 数学公式 $$ h_\theta(x) &#x3D; \sum^{n}_{i&#x3D;0}\theta_ix_i &#x3D; \theta^Tx $$   (1) 其中$x$为特征值，$\theta$为相应权重 误差项分析： 公式(1)所建立的模型预测的值与真实值存在误差，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="机器学习相关模型">
 <meta property="og:url" content="http://example.com/2022/11/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/index.html">
 <meta property="og:site_name" content="时人的博客">
-<meta property="og:description" content="1. 线性回归问题描述： 问题化成求解区间的值的问题成为回归问题；若问题的各项指标与所求值为线性关系则称为线性回归问题。 数学公式 h_\theta(x) &#x3D; \sum^{n}_{i&#x3D;0}\theta_ix_i &#x3D; \theta^Tx $$   (1)  其中$x$为特征值，$\theta$为相应权重  **误差项分析：**  公式(1)所建立的模型预测的值与真实值存在误差，对于每个样本用数学公式">
+<meta property="og:description" content="1. 线性回归问题描述： 问题化成求解区间的值的问题成为回归问题；若问题的各项指标与所求值为线性关系则称为线性回归问题。 数学公式 $$ h_\theta(x) &#x3D; \sum^{n}_{i&#x3D;0}\theta_ix_i &#x3D; \theta^Tx $$   (1) 其中$x$为特征值，$\theta$为相应权重 误差项分析： 公式(1)所建立的模型预测的值与真实值存在误差，">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/img%5C%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B.png">
+<meta property="og:image" content="http://example.com/img%5Closs_history.png">
+<meta property="og:image" content="http://example.com/img%5Cresult.png">
+<meta property="og:image" content="c:\Users\13747\Desktop\train_loss.png">
 <meta property="og:image" content="http://example.com/2022/11/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/img/IMG_20221027_223800.jpg">
+<meta property="og:image" content="http://example.com/img%5Cdiabetes_loss.png">
 <meta property="og:image" content="d:\gitcode\RemovePython\img\roc%E6%9B%B2%E7%BA%BF.webp">
 <meta property="article:published_time" content="2022-11-11T07:11:07.016Z">
 <meta property="article:modified_time" content="2023-06-12T04:19:28.173Z">
 <meta property="article:author" content="时人">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2022/11/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/img/IMG_20221027_223800.jpg">
+<meta name="twitter:image" content="http://example.com/img%5C%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B.png">
 
 <link rel="canonical" href="http://example.com/2022/11/11/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">
 
@@ -214,212 +219,143 @@
         <h3 id="1-线性回归"><a href="#1-线性回归" class="headerlink" title="1. 线性回归"></a>1. 线性回归</h3><p><strong>问题描述：</strong></p>
 <p>问题化成求解区间的值的问题成为回归问题；若问题的各项指标与所求值为线性关系则称为线性回归问题。</p>
 <p><strong>数学公式</strong></p>
-<script type="math/tex; mode=display">h_\theta(x) = \sum^{n}_{i=0}\theta_ix_i = \theta^Tx $$   (1)
-
-其中$x$为特征值，$\theta$为相应权重
-
-**误差项分析：**
-
-公式(1)所建立的模型预测的值与真实值存在误差，对于每个样本用数学公式表达为：
-
-$$y^{(i)} = \theta^Tx^{(i)} + \epsilon^{i}$$    (2)
-
-其中$y^{(i)}$是真实值，$\theta^Tx^{(i)}$, $\epsilon^{i}$ 是误差项，上式也称作目标函数
-
-模型要符合**独立同分布**的要求:    误差项是独立的并且具有享用的分布,并且服从均值为0方差为$\theta^2$的高斯分布; 独立: 样本之间无影响;同分布: 样本间属于同一个系统
-
-**误差服从高斯分布:**
-
-$$p(\epsilon^{i}) = \frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(\epsilon^{i})^2}{2\sigma^2})$$    (3)
-
-将(2)式代入(3)式中:
-
-$$p(y^{(i)}|x^{(i)};\theta) = \frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}- \theta^Tx^{(i)})^2}{2\sigma^2})$$    (4)
-
-**似然函数估计:**
-
-为了求解参数$\theta$ 对(4)式进行似然估计, 所求为样本的联合概率, 因样本之间式独立同分布, 因此联合概率可以用样本的乘机表示.
-
-$$L(\theta) = \prod^{m}_{i = 1}p(y^{(i)}|x^{(i)};\theta) $$    (5)
-
-将上式转化成对数, 将样本之间相乘转化成相加, 简化计算
-
-$$logL(\theta) = log\prod^{m}_{i = 1} \frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}- \theta^Tx^{(i)})^2}{2\sigma^2})$$    (5)
-
-展开并化简得:
-
-$$lnL(\theta) = mln\frac{1}{\sqrt{2\pi}\sigma} - \frac{1}{\sigma^2}.\frac{1}{2}\sum^m_{i=1}(y^{(i)} - \theta^Tx^{(i)})^2$$    (6)
-
-**极大似然分析:**
-
-似然函数取得最大值时表示相应的参数能够使得统计模型合理, 因此要求(6)式的最大值, 也即是求后半部分的最小值:</script><p>min J(\theta) = \frac{1}{2}\sum^m_{i=1}(y^{(i)} - \theta^Tx^{(i)})^2    (7)</p>
-<script type="math/tex; mode=display">
-对上式求偏导:
-
-![image-20221021174355914](img\推导过程.png)
-
-通过对权重及偏置项求偏导，从而求出他们的梯度，之后通过梯度下降法更新参数。
-
-
-
-**梯度下降法：**
-
-批量梯度下降：</script><p>w<em>j = w</em>{j} + \frac{1}{m}\sum^{m}_{i=1}(y^{(i)} - h(x^i))x_j^i</p>
-<script type="math/tex; mode=display">
-</script><p>b = b + \frac{1}{m}\sum^{m}_{i=1}(y^{(i)} - h(x^i))</p>
-<script type="math/tex; mode=display">
-
-容易得到最优解，但式由于每次考虑多有样本，因此速度较慢
-
-随机梯度下降：</script><p>w<em>j = w</em>{j} + (y^{(i)} - h(x^i))x_j^i</p>
-<script type="math/tex; mode=display">
-</script><p>b = b + (y^{(i)} - h(x^i))</p>
-<script type="math/tex; mode=display">
-
-每次只考虑一个样本，迭代速度快，但不一定每次都朝着收敛的方向
-
-小批量梯度下降法：</script><p>w<em>j = w</em>{j} +\alpha\frac{1}{10}\sum^{i+9}_{k=i}(y^{(k)} - h(x^k))x_j^k</p>
-<script type="math/tex; mode=display">
-</script><p>b = b + \alpha\frac{1}{10}\sum^{i+9}_{k=i}(y^{(k)} - h(x^k))</p>
-<script type="math/tex; mode=display">
-
-**代码：**
-
+<p>$$ h_\theta(x) &#x3D; \sum^{n}_{i&#x3D;0}\theta_ix_i &#x3D; \theta^Tx $$   (1)</p>
+<p>其中$x$为特征值，$\theta$为相应权重</p>
+<p><strong>误差项分析：</strong></p>
+<p>公式(1)所建立的模型预测的值与真实值存在误差，对于每个样本用数学公式表达为：</p>
+<p>$$y^{(i)} &#x3D; \theta^Tx^{(i)} + \epsilon^{i}$$    (2)</p>
+<p>其中$y^{(i)}$是真实值，$\theta^Tx^{(i)}$, $\epsilon^{i}$ 是误差项，上式也称作目标函数</p>
+<p>模型要符合<strong>独立同分布</strong>的要求:	误差项是独立的并且具有享用的分布,并且服从均值为0方差为$\theta^2$的高斯分布; 独立: 样本之间无影响;同分布: 样本间属于同一个系统</p>
+<p><strong>误差服从高斯分布:</strong></p>
+<p>$$p(\epsilon^{i}) &#x3D; \frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(\epsilon^{i})^2}{2\sigma^2})$$	(3)</p>
+<p>将(2)式代入(3)式中:</p>
+<p>$$p(y^{(i)}|x^{(i)};\theta) &#x3D; \frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}- \theta^Tx^{(i)})^2}{2\sigma^2})$$	(4)</p>
+<p><strong>似然函数估计:</strong></p>
+<p>为了求解参数$\theta$ 对(4)式进行似然估计, 所求为样本的联合概率, 因样本之间式独立同分布, 因此联合概率可以用样本的乘机表示.</p>
+<p>$$L(\theta) &#x3D; \prod^{m}_{i &#x3D; 1}p(y^{(i)}|x^{(i)};\theta) $$	(5)</p>
+<p>将上式转化成对数, 将样本之间相乘转化成相加, 简化计算</p>
+<p>$$logL(\theta) &#x3D; log\prod^{m}_{i &#x3D; 1} \frac{1}{\sqrt{2\pi}\sigma}exp(-\frac{(y^{(i)}- \theta^Tx^{(i)})^2}{2\sigma^2})$$	(5)</p>
+<p>展开并化简得:</p>
+<p>$$lnL(\theta) &#x3D; mln\frac{1}{\sqrt{2\pi}\sigma} - \frac{1}{\sigma^2}.\frac{1}{2}\sum^m_{i&#x3D;1}(y^{(i)} - \theta^Tx^{(i)})^2$$	(6)</p>
+<p><strong>极大似然分析:</strong></p>
+<p>似然函数取得最大值时表示相应的参数能够使得统计模型合理, 因此要求(6)式的最大值, 也即是求后半部分的最小值:</p>
+<p>$$<br>min J(\theta) &#x3D; \frac{1}{2}\sum^m_{i&#x3D;1}(y^{(i)} - \theta^Tx^{(i)})^2	(7)<br>$$<br>对上式求偏导:</p>
+<p><img src="/img%5C%E6%8E%A8%E5%AF%BC%E8%BF%87%E7%A8%8B.png" alt="image-20221021174355914"></p>
+<p>通过对权重及偏置项求偏导，从而求出他们的梯度，之后通过梯度下降法更新参数。</p>
+<p><strong>梯度下降法：</strong></p>
+<p>批量梯度下降：<br>$$<br>w_j &#x3D; w_{j} + \frac{1}{m}\sum^{m}_{i&#x3D;1}(y^{(i)} - h(x^i))x_j^i<br>$$</p>
+<p>$$<br>b &#x3D; b + \frac{1}{m}\sum^{m}_{i&#x3D;1}(y^{(i)} - h(x^i))<br>$$</p>
+<p>容易得到最优解，但式由于每次考虑多有样本，因此速度较慢</p>
+<p>随机梯度下降：<br>$$<br>w_j &#x3D; w_{j} + (y^{(i)} - h(x^i))x_j^i<br>$$</p>
+<p>$$<br>b &#x3D; b + (y^{(i)} - h(x^i))<br>$$</p>
+<p>每次只考虑一个样本，迭代速度快，但不一定每次都朝着收敛的方向</p>
+<p>小批量梯度下降法：<br>$$<br>w_j &#x3D; w_{j} +\alpha\frac{1}{10}\sum^{i+9}_{k&#x3D;i}(y^{(k)} - h(x^k))x_j^k<br>$$</p>
+<p>$$<br>b &#x3D; b + \alpha\frac{1}{10}\sum^{i+9}_{k&#x3D;i}(y^{(k)} - h(x^k))<br>$$</p>
+<p><strong>代码：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 线性回归方程,获得预测值</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_yhat</span>(<span class="params">W, b, X</span>):</span><br><span class="line">    <span class="keyword">return</span> np.dot(X, W) + b</span><br><span class="line"></span><br><span class="line"><span class="comment"># 参数训练，采用批量梯度下降法</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">batch_size, lr, itr, W, b, X, Y</span>):</span><br><span class="line">    <span class="built_in">list</span> = []</span><br><span class="line">    <span class="comment"># 迭代次数</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(itr):</span><br><span class="line">        <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">        <span class="comment"># 批量更新参数</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, X.size, batch_size):</span><br><span class="line">			<span class="comment"># 获得一个batch数据，采用 if-else 语句防止最后数据不足一个batch</span></span><br><span class="line">            <span class="keyword">if</span> i + batch_size &gt; X.size:</span><br><span class="line">                step = X.size</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                step = i + batch_size</span><br><span class="line">            X_i = X[i:step, :]</span><br><span class="line">            Y_i = Y[i:step, :]</span><br><span class="line">			<span class="comment"># 获得预测值，更新参数</span></span><br><span class="line">            y = get_yhat(W, b, X_i)</span><br><span class="line">            W = W + lr * <span class="number">1</span>/batch_size * (np.dot(X_i.T, Y_i - y))</span><br><span class="line">            b = b + lr * <span class="number">1</span>/batch_size * (np.<span class="built_in">sum</span>((Y_i - y).flatten()))</span><br><span class="line">            <span class="comment"># 采用均方误差作为评价指标，list 存储每一轮的均方误差</span></span><br><span class="line">            <span class="built_in">sum</span> += np.<span class="built_in">sum</span>((Y_i-y).flatten())**<span class="number">2</span></span><br><span class="line">         <span class="built_in">list</span>.append(<span class="built_in">sum</span>**<span class="number">0.5</span>)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>, W, b</span><br></pre></td></tr></table></figure>
 
-**注：** $X$ 为特征向量矩阵，每一行为一个样本;$Y$ 为一个列向量，样本的标签;$W$为特征的权重，列向量;$b$为偏置向，一个实数。
-
-改进，改成面向对象形式
-
+<p><strong>注：</strong> $X$ 为特征向量矩阵，每一行为一个样本;$Y$ 为一个列向量，样本的标签;$W$为特征的权重，列向量;$b$为偏置向，一个实数。</p>
+<p>改进，改成面向对象形式</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">LinearRegression</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, data, lable</span>):</span><br><span class="line">        self.data = data</span><br><span class="line">        self.lable = lable</span><br><span class="line">        self.theta = np.mat(np.random.rand(self.data.shape[<span class="number">1</span>], <span class="number">1</span>))</span><br><span class="line">        self.bais = np.random.rand(<span class="number">1</span>)</span><br><span class="line">        self.loss_history = []</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">train</span>(<span class="params">self, batch_size, lr, itr</span>):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(itr):</span><br><span class="line">            <span class="built_in">sum</span> = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> batch <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, self.data.shape[<span class="number">0</span>], batch_size):</span><br><span class="line">                <span class="keyword">if</span> batch + batch_size &gt;= self.data.shape[<span class="number">0</span>]:</span><br><span class="line">                    X_batch = self.data[batch: self.data.shape[<span class="number">0</span>], :]</span><br><span class="line">                    Y_batch = self.lable[batch: self.data.shape[<span class="number">0</span>], :]</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    X_batch = self.data[batch: batch + batch_size, :]</span><br><span class="line">                    Y_batch = self.lable[batch: batch + batch_size, :]</span><br><span class="line">                self.gradient_descent(X_batch, Y_batch, batch_size, lr)</span><br><span class="line">                <span class="built_in">sum</span> += self.MSE_LOSS(X_batch, Y_batch)</span><br><span class="line">            self.loss_history.append(<span class="built_in">sum</span>**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">gradient_descent</span>(<span class="params">self, X_batch, Y_batch, batch_size, lr</span>):</span><br><span class="line">        Y_hat = self.predict(X_batch)</span><br><span class="line">        self.theta = self.theta - lr * (<span class="number">1</span> / batch_size) * (np.dot(X_batch.T, Y_hat - Y_batch))</span><br><span class="line">        self.bais = self.bais - lr * (<span class="number">1</span> / batch_size) * (np.<span class="built_in">sum</span>(Y_hat - Y_batch).flatten())</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">predict</span>(<span class="params">self, sample</span>):</span><br><span class="line">        <span class="keyword">return</span> np.dot(sample, self.theta) + self.bais</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">MSE_LOSS</span>(<span class="params">self, data, label</span>):</span><br><span class="line">        y_hat = self.predict(data)</span><br><span class="line">        delta = y_hat - label</span><br><span class="line">        loss = (<span class="number">1</span>/data.shape[<span class="number">0</span>]) *  np.<span class="built_in">sum</span>(delta.flatten())</span><br><span class="line">        <span class="keyword">return</span> loss</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">plot_loss</span>(<span class="params">self, name</span>):</span><br><span class="line">        plt.plot(self.loss_history)</span><br><span class="line">        plt.savefig(<span class="string">&#x27;./img/&#x27;</span>+name+<span class="string">&#x27;_loss.png&#x27;</span>)</span><br><span class="line">        plt.close()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">plot_result</span>(<span class="params">self, name</span>):</span><br><span class="line">        Y = self.predict(self.data)</span><br><span class="line">        data = self.data.T.A[<span class="number">0</span>]</span><br><span class="line">        Y = Y.T.A[<span class="number">0</span>]</span><br><span class="line">        <span class="built_in">print</span>(data.shape)</span><br><span class="line">        <span class="built_in">print</span>(Y)</span><br><span class="line">        plt.plot(self.data, self.lable, <span class="string">&#x27;o&#x27;</span>, data, Y,<span class="string">&#x27;-&#x27;</span>)</span><br><span class="line">        plt.savefig(<span class="string">&#x27;./img/&#x27;</span>+name+<span class="string">&#x27;_result.png&#x27;</span>)</span><br><span class="line">        plt.close()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-测试：一维随机数据
-
+<p>测试：一维随机数据</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data = np.mat(<span class="number">2</span> * np.random.rand(<span class="number">100</span>, <span class="number">1</span>))</span><br><span class="line">label = np.mat(<span class="number">4</span> + <span class="number">3</span> * data + np.random.randn(<span class="number">100</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
 
-均方误差收敛图：
-
-![](img\loss_history.png)
-
-用学习到的参数预测直线：
-
-![](img\result.png)
-
-### 2. 数据标准化(归一化)
-
-**Z-Score normalization**</script><p>x’ = \frac{X - \mu}{\sigma}</p>
-<script type="math/tex; mode=display">
-其中$X$是数据值，$\mu$是数据集的平均值，$\sigma$是标准差。
-
-**线性标准化（最大最小）**</script><p>x’ = \frac{x - min(x)}{max(x) - min(x)}</p>
-<script type="math/tex; mode=display">
-其中$min(x)$是数据中的最小值，$max(x)$是数据中的最大值
-
-**列子：预测波士顿房价**
-
+<p>均方误差收敛图：</p>
+<p><img src="/img%5Closs_history.png"></p>
+<p>用学习到的参数预测直线：</p>
+<p><img src="/img%5Cresult.png"></p>
+<h3 id="2-数据标准化-归一化"><a href="#2-数据标准化-归一化" class="headerlink" title="2. 数据标准化(归一化)"></a>2. 数据标准化(归一化)</h3><p><strong>Z-Score normalization</strong><br>$$<br>x’ &#x3D; \frac{X - \mu}{\sigma}<br>$$<br>其中$X$是数据值，$\mu$是数据集的平均值，$\sigma$是标准差。</p>
+<p><strong>线性标准化（最大最小）</strong><br>$$<br>x’ &#x3D; \frac{x - min(x)}{max(x) - min(x)}<br>$$<br>其中$min(x)$是数据中的最小值，$max(x)$是数据中的最大值</p>
+<p><strong>列子：预测波士顿房价</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">数据描述：一共十三个特征</span><br><span class="line">属性描述（不一定对..）: Attribute Information (in order):</span><br><span class="line">        - CRIM     犯罪率；per capita crime rate by town</span><br><span class="line">        - ZN       proportion of residential land zoned for lots over 25,000 sq.ft.</span><br><span class="line">        - INDUS    非零售商业用地占比；proportion of non-retail business acres per town</span><br><span class="line">        - CHAS     是否临Charles河；Charles River dummy variable (= 1 if tract bounds river; 0 otherwise)</span><br><span class="line">        - NOX      氮氧化物浓度；nitric oxides concentration (parts per 10 million)</span><br><span class="line">        - RM       房屋房间数；average number of rooms per dwelling</span><br><span class="line">        - AGE      房屋年龄；proportion of owner-occupied units built prior to 1940</span><br><span class="line">        - DIS      和就业中心的距离；weighted distances to five Boston employment centres</span><br><span class="line">        - RAD      是否容易上高速路；index of accessibility to radial highways</span><br><span class="line">        - TAX      税率；full-value property-tax rate per $10,000</span><br><span class="line">        - PTRATIO  学生人数比老师人数；pupil-teacher ratio by town</span><br><span class="line">        - B        城镇黑人比例计算的统计值；1000(Bk - 0.63)^2 where Bk is the proportion of black people by town</span><br><span class="line">        - LSTAT    低收入人群比例；% lower status of the population</span><br><span class="line">        - MEDV     房价中位数；Median value of owner-occupied homes in $1000&#x27;s</span><br></pre></td></tr></table></figure>
 
-特征：前三行
-
+<p>特征：前三行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[[6.3200e-03 1.8000e+01 2.3100e+00 0.0000e+00 5.3800e-01 6.5750e+00</span><br><span class="line">  6.5200e+01 4.0900e+00 1.0000e+00 2.9600e+02 1.5300e+01 3.9690e+02</span><br><span class="line">  4.9800e+00]</span><br><span class="line"> [2.7310e-02 0.0000e+00 7.0700e+00 0.0000e+00 4.6900e-01 6.4210e+00</span><br><span class="line">  7.8900e+01 4.9671e+00 2.0000e+00 2.4200e+02 1.7800e+01 3.9690e+02</span><br><span class="line">  9.1400e+00]</span><br><span class="line"> [2.7290e-02 0.0000e+00 7.0700e+00 0.0000e+00 4.6900e-01 7.1850e+00</span><br><span class="line">  6.1100e+01 4.9671e+00 2.0000e+00 2.4200e+02 1.7800e+01 3.9283e+02</span><br><span class="line">  4.0300e+00]]</span><br></pre></td></tr></table></figure>
 
-标签：对应的房价
-
+<p>标签：对应的房价</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[24.  21.6 34.7]</span><br></pre></td></tr></table></figure>
 
-**数据预处理：**
-
-**标准化处理**：刚开始用原始数据训练，结果根本不收敛。误差值很大，推测应该是特征之间差别太大，需要标准化处理，这里是用的线性标准化处理，使用sklearn的自带方法：
-
+<p><strong>数据预处理：</strong></p>
+<p><strong>标准化处理</strong>：刚开始用原始数据训练，结果根本不收敛。误差值很大，推测应该是特征之间差别太大，需要标准化处理，这里是用的线性标准化处理，使用sklearn的自带方法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_boston</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> MinMaxScaler</span><br><span class="line"></span><br><span class="line">scaler = MinMaxScaler()</span><br><span class="line">    sample = load_boston()</span><br><span class="line">    data = sample.data</span><br><span class="line">    label = sample.target</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 数据集归一化</span></span><br><span class="line">    data= scaler.fit_transform(data)</span><br><span class="line">    label = scaler.fit_transform(label.reshape(-<span class="number">1</span>, <span class="number">1</span>))</span><br></pre></td></tr></table></figure>
 
-**分割数据集+洗牌：**
-
+<p><strong>分割数据集+洗牌：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">train_data = data[:<span class="number">400</span>]</span><br><span class="line">train_label = label[:<span class="number">400</span>]</span><br><span class="line">test_data = data[<span class="number">400</span>:]</span><br><span class="line">test_label = label[<span class="number">400</span>:]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(data.shape)</span><br><span class="line"><span class="comment"># print(sample.target)</span></span><br><span class="line"><span class="comment"># 对数据进行 shuffle</span></span><br><span class="line">index_train = np.random.permutation(train_data.shape[<span class="number">0</span>])</span><br><span class="line">train_data = train_data[index_train]</span><br><span class="line">train_label = train_label[index_train]</span><br><span class="line"></span><br><span class="line">index_test = np.random.permutation(test_data.shape[<span class="number">0</span>])</span><br><span class="line">test_data = test_data[index_test]</span><br><span class="line">test_label = test_label[index_test]</span><br></pre></td></tr></table></figure>
 
-**转成矩阵：**
-
+<p><strong>转成矩阵：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">train_data = np.mat(train_data)</span><br><span class="line">train_label = np.mat(train_label)</span><br><span class="line"><span class="built_in">print</span>(train_label.shape)</span><br><span class="line">test_data = np.mat(test_data)</span><br><span class="line">test_label = np.mat(test_label)</span><br></pre></td></tr></table></figure>
 
-**预测：**
-
+<p><strong>预测：</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">linear = LinearRegression(train_data, train_label)</span><br><span class="line"></span><br><span class="line">linear.train(<span class="number">400</span>, <span class="number">0.01</span>, <span class="number">500</span>)</span><br><span class="line"></span><br><span class="line">linear.plot_loss(<span class="string">&#x27;train&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;训练误差：&#x27;</span>, linear.loss_history[-<span class="number">1</span>])</span><br><span class="line">y_hat = linear.predict(test_data)</span><br><span class="line"><span class="built_in">print</span>(test_label.flatten())</span><br><span class="line"><span class="built_in">print</span>(y_hat.flatten())</span><br><span class="line">delta = test_label - y_hat</span><br><span class="line">test_loss = (<span class="number">1</span>/delta.shape[<span class="number">0</span>])*np.<span class="built_in">sum</span>(delta.flatten())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;测试误差：&#x27;</span>,test_loss)</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用sklearn自带</span></span><br><span class="line"><span class="keyword">from</span> sklearn <span class="keyword">import</span> linear_model</span><br><span class="line">reg = linear_model.LinearRegression()</span><br><span class="line">reg.fit(data, label)</span><br><span class="line"><span class="built_in">print</span>(reg.coef_)</span><br><span class="line"><span class="built_in">print</span>(reg.intercept_)</span><br></pre></td></tr></table></figure>
 
-问题：当小批量梯度下降时收敛的不好，退化成批量梯度下降时好一点，也即是batch_size等于全体样本数的时候。
-
-![](C:\Users\13747\Desktop\train_loss.png)
-
-**优化：**
-
-使用非线性回归模型精度应该会有所提高。
-
-**列子：糖尿病数据集**
-
-用自己写的和sklearn自带的线性回归做对比
-
+<p>问题：当小批量梯度下降时收敛的不好，退化成批量梯度下降时好一点，也即是batch_size等于全体样本数的时候。</p>
+<p><img src="C:\Users\13747\Desktop\train_loss.png"></p>
+<p><strong>优化：</strong></p>
+<p>使用非线性回归模型精度应该会有所提高。</p>
+<p><strong>列子：糖尿病数据集</strong></p>
+<p>用自己写的和sklearn自带的线性回归做对比</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=<span class="literal">True</span>)</span><br><span class="line">    <span class="built_in">print</span>(diabetes_X.shape)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 取一个特征</span></span><br><span class="line">    diabetes_X = diabetes_X[:, np.newaxis, <span class="number">2</span>]</span><br><span class="line">    <span class="comment"># print(diabetes_X[:10])</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 分割数据集</span></span><br><span class="line">    diabetes_X_train = diabetes_X[:-<span class="number">20</span>]</span><br><span class="line">    diabetes_X_test = diabetes_X[-<span class="number">20</span>:]</span><br><span class="line"></span><br><span class="line">    diabetes_y_Train = diabetes_y[:-<span class="number">20</span>]</span><br><span class="line">    diabetes_y_test = diabetes_y[-<span class="number">20</span>:]</span><br><span class="line">    <span class="built_in">print</span>(diabetes_y_test)</span><br><span class="line">    <span class="comment"># 创建模型</span></span><br><span class="line">    regr = linear_model.LinearRegression()</span><br><span class="line"></span><br><span class="line">    linear =LinearRegression(np.mat(diabetes_X_train), np.mat(diabetes_y_Train).T)</span><br><span class="line">    <span class="comment"># 训练</span></span><br><span class="line">    regr.fit(diabetes_X_train, diabetes_y_Train)</span><br><span class="line"></span><br><span class="line">    linear.train(diabetes_y_Train.shape[<span class="number">0</span>], <span class="number">1</span>, <span class="number">2000</span>)</span><br><span class="line">    linear.plot_loss(<span class="string">&quot;diabetes&quot;</span>)</span><br><span class="line">    <span class="comment"># 预测</span></span><br><span class="line">    diabetes_y_pred = regr.predict(diabetes_X_test)</span><br><span class="line"></span><br><span class="line">    diabetes_y_pred_l = linear.predict(np.mat(diabetes_X_test))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># The coefficients</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;Coefficients: \n&quot;</span>, regr.coef_)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;theta: \n&quot;</span>, linear.theta)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># jun均方误差</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;MSE_Sklearn: %.2f&quot;</span> % mean_squared_error(diabetes_y_test, diabetes_y_pred))</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;MSE_Linear: %.2f&quot;</span> % mean_squared_error(diabetes_y_test, diabetes_y_pred_l.T.A[<span class="number">0</span>]))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Plot outputs</span></span><br><span class="line">    plt.scatter(diabetes_X_test, diabetes_y_test, color=<span class="string">&quot;black&quot;</span>)</span><br><span class="line">    plt.plot(diabetes_X_test, diabetes_y_pred, color=<span class="string">&quot;blue&quot;</span>, linewidth=<span class="number">3</span>)</span><br><span class="line">    plt.plot(diabetes_X_test, diabetes_y_pred_l.T.A[<span class="number">0</span>], color=<span class="string">&quot;red&quot;</span>, linewidth=<span class="number">3</span>)</span><br><span class="line">    plt.xticks(())</span><br><span class="line">    plt.yticks(())</span><br><span class="line">    plt.savefig(<span class="string">&#x27;./img/sklearn_result.png&#x27;</span>)</span><br><span class="line">    plt.show()</span><br></pre></td></tr></table></figure>
 
-对比之后发现的问题：当第一次时我设置的学习率是0.01，500轮次，发现在测试集上是条直线
-
+<p>对比之后发现的问题：当第一次时我设置的学习率是0.01，500轮次，发现在测试集上是条直线</p>
 <img src="img\IMG_20221027_223800.jpg" alt="IMG_20221027_223800" style="zoom: 67%;" />
 
-以上是学习率和轮次主键增大拟合的效果，红色线是自己写的代码的拟合情况；蓝色是sklearn的拟合情况。最后是lr=1,itr=2000的拟合情况，几乎重合。
-
-![](img\diabetes_loss.png)
-
-这是lr=1，itr=2000的loss。虽然单特征，但是训练的轮次也不少。
-
-### 3. 岭回归 Ridge regression
-
-岭回归是在原有的损失函数上加一个惩罚项，该惩罚项是参数的二范数，可以有效的防止过拟合问题。</script><p>min_w||Xw-y||^2_2 + \alpha||w||^2_2</p>
-<script type="math/tex; mode=display">
-为什么加上参数的二范数作为惩罚项可以防止过拟合：因为它可以把参数尽量小，接近于0但是不等于0，小的参数可以把模型变得更简单。
-
-参数$\alpha$控制着收缩量，值越大收缩量就越大，权值越鲁棒。
-
-**岭回归梯度：**
-
-对$w_j$求偏导：</script><p>\nabla L(w<em>j) =-\frac{1}{m}\sum^{m}</em>{i=1}(y^{(i)} - h(x^i))x_j^i + 2\alpha w_j</p>
-<script type="math/tex; mode=display">
-
+<p>以上是学习率和轮次主键增大拟合的效果，红色线是自己写的代码的拟合情况；蓝色是sklearn的拟合情况。最后是lr&#x3D;1,itr&#x3D;2000的拟合情况，几乎重合。</p>
+<p><img src="/img%5Cdiabetes_loss.png"></p>
+<p>这是lr&#x3D;1，itr&#x3D;2000的loss。虽然单特征，但是训练的轮次也不少。</p>
+<h3 id="3-岭回归-Ridge-regression"><a href="#3-岭回归-Ridge-regression" class="headerlink" title="3. 岭回归 Ridge regression"></a>3. 岭回归 Ridge regression</h3><p>岭回归是在原有的损失函数上加一个惩罚项，该惩罚项是参数的二范数，可以有效的防止过拟合问题。<br>$$<br>min_w||Xw-y||^2_2 + \alpha||w||^2_2<br>$$<br>为什么加上参数的二范数作为惩罚项可以防止过拟合：因为它可以把参数尽量小，接近于0但是不等于0，小的参数可以把模型变得更简单。</p>
+<p>参数$\alpha$控制着收缩量，值越大收缩量就越大，权值越鲁棒。</p>
+<p><strong>岭回归梯度：</strong></p>
+<p>对$w_j$求偏导：<br>$$<br>\nabla L(w_j) &#x3D;-\frac{1}{m}\sum^{m}_{i&#x3D;1}(y^{(i)} - h(x^i))x_j^i + 2\alpha w_j<br>$$</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ridge_regression</span>(<span class="params">self, X_batch, Y_batch, batch_size, lr, alpha</span>):</span><br><span class="line">    Y_hat = self.predict(X_batch)</span><br><span class="line">    self.theta = self.theta - lr * (<span class="number">1</span> / batch_size) * (np.dot(X_batch.T, Y_hat - Y_batch)) - <span class="number">2</span>*alpha *self.theta</span><br><span class="line">    self.bais = self.bais - lr * (<span class="number">1</span> / batch_size) * (np.<span class="built_in">sum</span>(Y_hat - Y_batch).flatten()) - <span class="number">2</span>*alpha*self.bais</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-### 4. 评估标准
-
-**交叉验证法**
-
-**混淆矩阵法**
-
-|      |              |    Positive    | Negative       |
-| :--: | :----------: | :------------: | -------------- |
-|      | **Positive** | True Positive  | False Negative |
-|      | **Negative** | False Positive | True Megative  |
-
-True Positive(TP): 真正类。样本的真实类别是正类，并且模型识别的结果也是正类。
-
-False Negative(FN): 假负类。样本的真实类别是正类，但是模型将其识别为负类。
-
-False Positive(FP): 假正类。样本的真实类别是负类，但是模型将其识别为正类。
-
-True Negative(TN): 真负类。样本的真实类别是负类，并且模型将其识别为负类。
-
-1. 精确率：模型识别正确的个数/样本总数</script><p>Accuracy = (TP + TN)/(TP + FN + FP + TN)</p>
-<script type="math/tex; mode=display">
-
-2. 正确率/查准率：模型识别为正类的样本中，真正为正类的样本所占的比列</script><p>Precision = TP/(TP + FP)</p>
-<script type="math/tex; mode=display">
-
-3. 召回率(TPR)：实际正样本中，分类器能预测出多少</script><p>Recall = TP/(TP + FN)</p>
-<script type="math/tex; mode=display">
-
-4. 特异性 Specificity
-
-​        特异性指标，表示的是模型识别为负类的样本的数量，占总的负类样本数量的比值。
-
-​        负正类率（False Positive Rate, FPR），计算公式为：FPR=FP/(TN+FP)，计算的是模型错识别为正类的        负类样本占所有负类样本的比例，一般越低越好。</script><p>Specificity = 1 - FPR</p>
-<p>$$</p>
+<h3 id="4-评估标准"><a href="#4-评估标准" class="headerlink" title="4. 评估标准"></a>4. 评估标准</h3><p><strong>交叉验证法</strong></p>
+<p><strong>混淆矩阵法</strong></p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+<th align="center">Positive</th>
+<th>Negative</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"></td>
+<td align="center"><strong>Positive</strong></td>
+<td align="center">True Positive</td>
+<td>False Negative</td>
+</tr>
+<tr>
+<td align="center"></td>
+<td align="center"><strong>Negative</strong></td>
+<td align="center">False Positive</td>
+<td>True Megative</td>
+</tr>
+</tbody></table>
+<p>True Positive(TP): 真正类。样本的真实类别是正类，并且模型识别的结果也是正类。</p>
+<p>False Negative(FN): 假负类。样本的真实类别是正类，但是模型将其识别为负类。</p>
+<p>False Positive(FP): 假正类。样本的真实类别是负类，但是模型将其识别为正类。</p>
+<p>True Negative(TN): 真负类。样本的真实类别是负类，并且模型将其识别为负类。</p>
+<ol>
+<li>精确率：模型识别正确的个数&#x2F;样本总数</li>
+</ol>
+<p>$$<br>Accuracy &#x3D; (TP + TN)&#x2F;(TP + FN + FP + TN)<br>$$</p>
+<ol start="2">
+<li>正确率&#x2F;查准率：模型识别为正类的样本中，真正为正类的样本所占的比列</li>
+</ol>
+<p>$$<br>Precision &#x3D; TP&#x2F;(TP + FP)<br>$$</p>
+<ol start="3">
+<li>召回率(TPR)：实际正样本中，分类器能预测出多少</li>
+</ol>
+<p>$$<br>Recall &#x3D; TP&#x2F;(TP + FN)<br>$$</p>
+<ol start="4">
+<li>特异性 Specificity</li>
+</ol>
+<p>​		特异性指标，表示的是模型识别为负类的样本的数量，占总的负类样本数量的比值。</p>
+<p>​		负正类率（False Positive Rate, FPR），计算公式为：FPR&#x3D;FP&#x2F;(TN+FP)，计算的是模型错识别为正类的		负类样本占所有负类样本的比例，一般越低越好。<br>$$<br>Specificity &#x3D; 1 - FPR<br>$$</p>
 <p><strong>ROC曲线</strong></p>
 <blockquote>
 <p>对于分类问题而言，需要给输出设置一个阈值。如二分类问题，如果输出高于阈值，代表一个类别，如果低于，代表另一种类别。ROC曲线展示出模型在某一阈值下分类的能力。</p>
@@ -428,7 +364,7 @@ True Negative(TN): 真负类。样本的真实类别是负类，并且模型将�
 <p>$y$轴：表示召回率 TPR</p>
 <p>坐标$(x,y)$: 表示模型在某个阈值下的FPR，TPR的值</p>
 <p>由以上分析可知，某一点的$y$值越大，$x$值越小，模型的分类能力越强</p>
-<p><img src="D:\gitcode\RemovePython\img\roc曲线.webp" alt=""></p>
+<p><img src="D:\gitcode\RemovePython\img\roc曲线.webp"></p>
 <p><strong>AUC面积</strong></p>
 <p>指ROC曲线下的面积，跟模型的分类能力成正相关，即面积越大分类能力越好。</p>
 
@@ -508,7 +444,7 @@ True Negative(TN): 真负类。样本的真实类别是负类，并且模型将�
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">1. 线性回归</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92"><span class="nav-number">1.</span> <span class="nav-text">1. 线性回归</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%95%B0%E6%8D%AE%E6%A0%87%E5%87%86%E5%8C%96-%E5%BD%92%E4%B8%80%E5%8C%96"><span class="nav-number">2.</span> <span class="nav-text">2. 数据标准化(归一化)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B2%AD%E5%9B%9E%E5%BD%92-Ridge-regression"><span class="nav-number">3.</span> <span class="nav-text">3. 岭回归 Ridge regression</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%AF%84%E4%BC%B0%E6%A0%87%E5%87%86"><span class="nav-number">4.</span> <span class="nav-text">4. 评估标准</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
