@@ -181,7 +181,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-02-17 10:30:09" itemprop="dateModified" datetime="2023-02-17T10:30:09+08:00">2023-02-17</time>
+                <time title="修改时间：2023-06-12 12:02:33" itemprop="dateModified" datetime="2023-06-12T12:02:33+08:00">2023-06-12</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -249,7 +249,7 @@ $$lnL(\theta) = mln\frac{1}{\sqrt{2\pi}\sigma} - \frac{1}{\sigma^2}.\frac{1}{2}\
 <script type="math/tex; mode=display">
 对上式求偏导:
 
-![image-20221021174355914](D:\study\javaProject\Blog\source\_posts\img\推导过程.png)
+![image-20221021174355914](.\img\推导过程.png)
 
 通过对权重及偏置项求偏导，从而求出他们的梯度，之后通过梯度下降法更新参数。
 
@@ -292,11 +292,11 @@ $$lnL(\theta) = mln\frac{1}{\sqrt{2\pi}\sigma} - \frac{1}{\sigma^2}.\frac{1}{2}\
 
 均方误差收敛图：
 
-![](D:\gitcode\RemovePython\img\loss_history.png)
+![](\img\loss_history.png)
 
 用学习到的参数预测直线：
 
-![](D:\gitcode\RemovePython\img\result.png)
+![](\img\result.png)
 
 ### 数据标准化(归一化)
 
@@ -356,11 +356,11 @@ $$lnL(\theta) = mln\frac{1}{\sqrt{2\pi}\sigma} - \frac{1}{\sigma^2}.\frac{1}{2}\
 
 对比之后发现的问题：当第一次时我设置的学习率是0.01，500轮次，发现在测试集上是条直线
 
-<img src="F:\QQ数据文件\1374720934\FileRecv\MobileFile\IMG_20221027_223800.jpg" alt="IMG_20221027_223800" style="zoom: 67%;" />
+<img src="img\IMG_20221027_223800.jpg" alt="IMG_20221027_223800" style="zoom: 67%;" />
 
 以上是学习率和轮次主键增大拟合的效果，红色线是自己写的代码的拟合情况；蓝色是sklearn的拟合情况。最后是lr=1,itr=2000的拟合情况，几乎重合。
 
-![](D:\gitcode\RemovePython\diabetes_loss.png)
+![](img\diabetes_loss.png)
 
 这是lr=1，itr=2000的loss。虽然单特征，但是训练的轮次也不少。
 
