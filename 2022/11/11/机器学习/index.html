@@ -264,21 +264,21 @@ $$lnL(\theta) = mln\frac{1}{\sqrt{2\pi}\sigma} - \frac{1}{\sigma^2}.\frac{1}{2}\
 
 **梯度下降法：**
 
-批量梯度下降：</script><p>w_j = w_{j} + \frac{1}{m}\sum^{m}_{i=1}(y^{(i)} - h(x^i))x_j^i</p>
+批量梯度下降：</script><p>w<em>j = w</em>{j} + \frac{1}{m}\sum^{m}_{i=1}(y^{(i)} - h(x^i))x_j^i</p>
 <script type="math/tex; mode=display">
 </script><p>b = b + \frac{1}{m}\sum^{m}_{i=1}(y^{(i)} - h(x^i))</p>
 <script type="math/tex; mode=display">
 
 容易得到最优解，但式由于每次考虑多有样本，因此速度较慢
 
-随机梯度下降：</script><p>w_j = w_{j} + (y^{(i)} - h(x^i))x_j^i</p>
+随机梯度下降：</script><p>w<em>j = w</em>{j} + (y^{(i)} - h(x^i))x_j^i</p>
 <script type="math/tex; mode=display">
 </script><p>b = b + (y^{(i)} - h(x^i))</p>
 <script type="math/tex; mode=display">
 
 每次只考虑一个样本，迭代速度快，但不一定每次都朝着收敛的方向
 
-小批量梯度下降法：</script><p>w_j = w_{j} +\alpha\frac{1}{10}\sum^{i+9}_{k=i}(y^{(k)} - h(x^k))x_j^k</p>
+小批量梯度下降法：</script><p>w<em>j = w</em>{j} +\alpha\frac{1}{10}\sum^{i+9}_{k=i}(y^{(k)} - h(x^k))x_j^k</p>
 <script type="math/tex; mode=display">
 </script><p>b = b + \alpha\frac{1}{10}\sum^{i+9}_{k=i}(y^{(k)} - h(x^k))</p>
 <script type="math/tex; mode=display">
@@ -381,7 +381,7 @@ $$lnL(\theta) = mln\frac{1}{\sqrt{2\pi}\sigma} - \frac{1}{\sigma^2}.\frac{1}{2}\
 
 **岭回归梯度：**
 
-对$w_j$求偏导：</script><p>\nabla L(w_j) =-\frac{1}{m}\sum^{m}_{i=1}(y^{(i)} - h(x^i))x_j^i + 2\alpha w_j</p>
+对$w_j$求偏导：</script><p>\nabla L(w<em>j) =-\frac{1}{m}\sum^{m}</em>{i=1}(y^{(i)} - h(x^i))x_j^i + 2\alpha w_j</p>
 <script type="math/tex; mode=display">
 
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">ridge_regression</span>(<span class="params">self, X_batch, Y_batch, batch_size, lr, alpha</span>):</span><br><span class="line">    Y_hat = self.predict(X_batch)</span><br><span class="line">    self.theta = self.theta - lr * (<span class="number">1</span> / batch_size) * (np.dot(X_batch.T, Y_hat - Y_batch)) - <span class="number">2</span>*alpha *self.theta</span><br><span class="line">    self.bais = self.bais - lr * (<span class="number">1</span> / batch_size) * (np.<span class="built_in">sum</span>(Y_hat - Y_batch).flatten()) - <span class="number">2</span>*alpha*self.bais</span><br><span class="line"></span><br></pre></td></tr></table></figure>
